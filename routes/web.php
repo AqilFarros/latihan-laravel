@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\AboutController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,18 +19,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/testing', function () {
-    return view('welcome');
-});
-
-Route::get('/hello', function () {
-    return view('hello');
-});
-
-Route::get('/parent', function () {
-    return view('admin.parent');
-});
-
-Route::resource('/about', AboutController::class);
-
-Route::get('/proflie-index',[ProfileController::class, 'index'])->name('ini profile');
+// Route for AdminController with resource
+Route::resource('admin', AdminController::class);
+Route::resource('category', CategoryController::class);
