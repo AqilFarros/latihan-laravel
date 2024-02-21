@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\Buah;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class BuahController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //return kearah index.blade.php
-        $category = Category::all();
-
-        return view('category.index', compact('category'));
+        //
+        return view('buah.index');
     }
 
     /**
@@ -28,8 +26,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //return ke arah create.blade.php
-        return view('category.create');
+        //
+        return view('buah.create');
     }
 
     /**
@@ -40,30 +38,24 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //lakukan function store
+        ////lakukan function store
         //lakukan validasi
         $this->validate($request, [
-            'name' => 'required'
+            'name' => 'required',
+            'harga' => 'required',
+            'warna' => 'required'
         ]);
 
         //simpan data ke dalam database
-        if (
-            Category::create([
+        $buah = Buah::create([
             'name' => $request->name,
-            'slug' => Str::slug($request->name)
-        ])
-        ) {
-            return redirect()->route('category.index')
-            ->with(['success' => 'Akhirnya Aku Bisa Laravel']);
-        } else {
-            return redirect()->route('category.index')
-            ->with(['error'], 'Laravel Sangat Mudah Dan Menyenangkan!!@@###');
-        }
+            'slug' => Str::slug($request->name),
+            'harga' => $request->harga,
+            'warna' => $request->warna
+        ]);
 
-            // jika sudah maka kembalikan ke halaman category.index
-            return redirect()->route('category.index');
-
-
+        // jika sudah maka kembalikan ke halaman category.index
+        return redirect()->route('buah.index');
     }
 
     /**
@@ -74,9 +66,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $category = Category::findOrFail($id);
-
-        return view('category.show', compact('category'));
+        //
     }
 
     /**
@@ -110,11 +100,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::findOrFail($id);
-
-        $category->delete();
-
-        return redirect()->route('category.index')
-        -> with(['success' => 'Aku Jago Laravel']);
+        //
     }
 }
