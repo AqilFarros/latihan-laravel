@@ -31,6 +31,7 @@
                         <td>{{ $row->name }}</td>
                         <td>
                             <a href="{{ route('category.show', $row->id) }}" class="btn btn-info">Laravel Nih Boss!!!</a>
+                            <a href="{{ route('category.edit', $row->id) }}" class="btn btn-warning">Laravel Update Boss!!!</a>
                             <form action="{{ route('category.destroy', $row->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
